@@ -1,0 +1,39 @@
+<div class="pv" id="pv" aria-hidden="true" role="dialog" aria-label="Product view">
+  <div class="pv-viewer" id="pvViewer">
+    <canvas id="pvCanvas"></canvas>
+    <div class="pv-top"><span class="pv-count" id="pvCount">01 / 03</span><span class="pv-live"><i></i>Live 3D</span></div>
+    <div class="pv-nav"><button id="pvPrev" aria-label="Previous piece">←</button><button id="pvNext" aria-label="Next piece">→</button></div>
+    <div class="pv-views" id="pvViews">
+      <button class="on" data-v="spin">Rotate</button><button data-v="front">Front</button><button data-v="back">Back</button><button data-v="detail">Detail</button>
+    </div>
+  </div>
+  <aside class="pv-panel" id="pvPanel">
+    <button class="pv-close" id="pvClose" aria-label="Close"><span></span><span></span></button>
+    <div class="pv-body" id="pvBody">
+      <div class="pv-tag" id="pvTag"></div>
+      <h2 class="pv-name" id="pvName"></h2>
+      <p class="pv-type" id="pvType"></p>
+      <p class="pv-price" id="pvPrice"></p>
+      <div class="pv-row" id="pvColorRow"><span class="lbl">Colour <b id="pvColorName"></b></span><div class="sws" id="pvSwatches"></div></div>
+      <div class="pv-row" id="pvSizeRow"><span class="lbl">Size</span><div class="sizes" id="pvSizes"></div></div>
+      <div class="pv-cd" id="pvCd"><span class="lbl">Drops in</span><div class="cd small"><div><b data-u="d">00</b><span>Days</span></div><em>:</em><div><b data-u="h">00</b><span>Hrs</span></div><em>:</em><div><b data-u="m">00</b><span>Min</span></div><em>:</em><div><b data-u="s">00</b><span>Sec</span></div></div></div>
+      <p class="pv-blurb" id="pvBlurb"></p>
+      <dl class="pv-details" id="pvDetails"></dl>
+      <div class="pv-cta" id="pvCta"></div>
+    </div>
+  </aside>
+</div>
+
+<div class="bagd" id="bagd" aria-hidden="true">
+  <div class="bagd-shade" id="bagShade"></div>
+  <aside class="bagd-panel" role="dialog" aria-label="Your bag">
+    <header class="bd-head"><h3>Your bag <b id="bdN">0</b></h3><button class="pv-close" id="bdClose" aria-label="Close bag"><span></span><span></span></button></header>
+    <div class="bd-items" id="bdItems"></div>
+    <div class="bd-foot" id="bdFoot">
+      <div class="bd-fields"><input id="bdName" type="text" placeholder="Your name" autocomplete="name"><input id="bdArea" type="text" placeholder="Delivery area, e.g. Lekki, Lagos" autocomplete="address-level2"></div>
+      <div class="bd-total"><span>Total</span><b id="bdTotal"></b></div>
+      <a class="btn btn-volt" id="bdWa" href="#" role="button"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9.5L5 20v-4H4z"/></svg>Order on WhatsApp</a>
+      <p class="bd-note">No payment now. Your order opens as a WhatsApp message to us — we confirm stock, delivery and how to pay there.</p>
+    </div>
+  </aside>
+</div>
