@@ -28,6 +28,31 @@
 </main>
 <div class="dlg" id="dlg" aria-hidden="true"><div class="dlg-shade"></div><div class="dlg-box" id="dlgBox"></div></div>
 <div class="toast" id="toast" role="status"></div>
-<script src="admin.js"></script>
+<style>
+#gate{position:fixed;inset:0;z-index:999;display:grid;place-items:center;background:#09090a;color:#f4f4f1;padding:24px;font-family:'Archivo',system-ui,sans-serif}
+#gate form{width:min(360px,100%);text-align:center}
+#gate .gl{font:700 22px/1 'Archivo',sans-serif;letter-spacing:.06em;margin-bottom:6px}
+#gate p{margin:0 0 22px;color:#8b8b86;font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase}
+#gate input{width:100%;box-sizing:border-box;padding:15px 16px;background:#121214;border:1px solid #2a2a2d;border-radius:6px;color:#f4f4f1;font:400 16px 'Space Mono',monospace;text-align:center;letter-spacing:.12em;outline:0}
+#gate input:focus{border-color:#c8ff2e}
+#gate button{margin-top:12px;width:100%;padding:15px;border:0;border-radius:6px;background:#c8ff2e;color:#0b0b0a;font:700 13px 'Archivo',sans-serif;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+#gate .ge{min-height:18px;margin-top:12px;color:#ff6b6b;font:400 12px 'Space Mono',monospace}
+</style>
+<div id="gate"><form id="gf" autocomplete="off"><div class="gl">SWITCH</div><p>Admin access</p><input id="gp" type="password" placeholder="Passcode" autocomplete="off" autofocus><button type="submit">Unlock</button><div class="ge" id="ge" role="alert"></div></form></div>
+<script>
+(function(){
+var SALT="2d30819d4bde219e",HASH="29e6ffa667669db866e75a95a7fadfb6ace13cdefd9ccad325e39da15c5a6d81",IT=150000,K="sw_admin_ok";
+function load(){var s=document.createElement("script");s.src="admin.js";document.body.appendChild(s);var g=document.getElementById("gate");if(g)g.remove();}
+function hex(b){return Array.prototype.map.call(new Uint8Array(b),function(x){return("0"+x.toString(16)).slice(-2)}).join("")}
+async function hash(p){var k=await crypto.subtle.importKey("raw",new TextEncoder().encode(p),"PBKDF2",false,["deriveBits"]);return hex(await crypto.subtle.deriveBits({name:"PBKDF2",hash:"SHA-256",salt:new TextEncoder().encode(SALT),iterations:IT},k,256))}
+var ok=false;try{ok=sessionStorage.getItem(K)===HASH}catch(e){}
+if(ok){load();return}
+var f=document.getElementById("gf"),i=document.getElementById("gp"),e=document.getElementById("ge"),fails=0,busy=false;
+if(!window.crypto||!crypto.subtle){e.textContent="Open this page over https to unlock.";}
+f.addEventListener("submit",async function(ev){ev.preventDefault();if(busy||!i.value)return;busy=true;e.textContent="";
+try{var h=await hash(i.value.trim());if(h===HASH){try{sessionStorage.setItem(K,HASH)}catch(x){}load();return}}catch(x){e.textContent="Could not verify here — use https.";busy=false;return}
+fails++;i.value="";var w=Math.min(30,fails*3);e.textContent="Wrong passcode. Wait "+w+"s…";setTimeout(function(){e.textContent="";busy=false;i.focus()},w*1000)});
+})();
+</script>
 </body>
 </html>

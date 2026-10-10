@@ -2,7 +2,7 @@
    type: tee | jorts | hoodie          days: negative = already released, positive = drops in N days (or give `date`)
    colorways[i]: { id, name, hex, ink (print colour), wash?, thread?, raw? } — everything the 3D garment needs */
 export const CURRENCY = '$';
-/* Store settings — overridden by `settings` inside catalogue.json (the admin page writes it). whatsapp = international number, digits only. */
+/* Store settings — overridden by `settings` inside catalogue.json . whatsapp = international number, digits only. */
 export const SETTINGS = { whatsapp: '2340000000000', currency: '$', brand: 'SWITCH' };
 export const DEFAULTS = {
   tee: { sizes: ['S', 'M', 'L', 'XL', '2XL'], details: [['Fabric', '280gsm combed cotton jersey'], ['Fit', 'Boxy, dropped shoulder'], ['Print', 'Water-based, soft hand'], ['Care', 'Cold wash, hang dry']] },
